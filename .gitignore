@@ -15,3 +15,5 @@
 /.web-server-pid
 ###< symfony/web-server-bundle ###
 *.xml
+.idea/workspace.xml
+.idea/Box-of-Heroes.iml
