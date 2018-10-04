@@ -8,6 +8,74 @@
     </div>
     <br/>
 
-    {% include 'calendar.html.twig' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-8">
+                {% include '_calendar.html.twig' %}
+            </div>
+        </div>
+    </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function ()
+        {
+            $('#calendar-holder').fullCalendar(
+            {
+                locale: 'fr',
+                header:
+                {
+                    left: 'prev, next, today',
+                    center: 'title',
+                    right: 'month, agendaWeek, agendaDay'
+                },
+                businessHours:
+                {
+                    start: '09:00',
+                    end: '18:00',
+                    dow: [1, 2, 3, 4, 5]
+                },
+                defaultView: 'month',
+                lazyFetching: true,
+                navLinks: true,
+                selectable: true,
+                editable: true,
+                eventDurationEditable: true,
+                // events: [
+                //     {
+                //         title: 'Event Title1',
+                //         start: '2018-09-30T13:13:55.008',
+                //         end: '2018-10-02T13:13:55.008'
+                //     },
+                //     {
+                //         title: 'Event Title2',
+                //         start: '2018-09-29T13:13:55-0400',
+                //         end: '2018-10-03T13:13:55-0400'
+                //     }
+                // ],
+                events: '/box-of-heroes/public/booking/getBookings'
+                // color: 'yellow',
+                // textColor: 'black'
+                // eventSources:
+                // [
+                //     {
+                //         url: '/box-of-heroes/public/booking/getBookings',
+                //         color: 'yellow',
+                //         textColor: 'black'
+                //         // type: 'GET',
+                //         // data: {
+                //         //     filters: {}
+                //         // },
+                //         // error: function () {
+                //         //     // alert('There was an error while fetching FullCalendar!');
+                //         // }
+                //     }
+                // ]
+            });
+        });
+    </script>
 {% endblock %}
