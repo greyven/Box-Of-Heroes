@@ -9,9 +9,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>BeginAt</th>
-                <th>EndAt</th>
                 <th>Title</th>
+                <th>Start</th>
+                <th>End</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,9 +19,9 @@
         {% for booking in bookings %}
             <tr>
                 <td>{{ booking.id }}</td>
-                <td>{{ booking.beginAt ? booking.beginAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ booking.endAt ? booking.endAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ booking.title }}</td>
+                <td>{{ booking.start ? booking.start|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ booking.end ? booking.end|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('booking_show', {'id': booking.id}) }}">show</a>
                     <a href="{{ path('booking_edit', {'id': booking.id}) }}">edit</a>

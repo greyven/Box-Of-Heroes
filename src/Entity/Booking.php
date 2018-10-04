@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Booking
 {
     /**
+     * @var int
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -17,19 +19,25 @@ class Booking
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $beginAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $endAt;
-
-    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $title;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $start;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $end;
 
 
     public function getId()
@@ -37,24 +45,24 @@ class Booking
         return $this->id;
     }
 
-    public function getBeginAt()
+    public function getStart()
     {
-        return $this->beginAt;
+        return $this->start;
     }
 
-    public function setBeginAt(\DateTime $beginAt)
+    public function setStart(\DateTime $start)
     {
-        $this->beginAt = $beginAt;
+        $this->start = $start;
     }
 
-    public function getEndAt()
+    public function getEnd()
     {
-        return $this->endAt;
+        return $this->end;
     }
 
-    public function setEndAt(\DateTime $endAt)
+    public function setEnd(\DateTime $end)
     {
-        $this->endAt = $endAt;
+        $this->end = $end;
     }
 
     public function getTitle()

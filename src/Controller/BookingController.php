@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Booking;
-use App\Form\BookingType;
+use App\Form\Booking1Type;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,12 +27,37 @@ class BookingController extends AbstractController
     }
 
     /**
+     * @Route("/getBookings", name="get_bookings", methods="GET")
+     */
+    public function getBookings()
+    {
+        $bookings = $this->getDoctrine()
+            ->getRepository(Booking::class)
+            ->findAll();
+
+
+        $events = array();
+        foreach ($bookings as $booking)
+        {
+            $e = array();
+            $e['id'] = $booking->getId();
+            $e['start'] = $booking->getStart()->format('Y-m-d');
+            $e['end'] = $booking->getEnd()->format('Y-m-d');
+            $e['title'] = $booking->getTitle();
+
+            array_push($events, $e);
+        }
+
+        return $this->json($events);
+    }
+
+    /**
      * @Route("/new", name="booking_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
         $booking = new Booking();
-        $form = $this->createForm(BookingType::class, $booking);
+        $form = $this->createForm(Booking1Type::class, $booking);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -62,7 +87,7 @@ class BookingController extends AbstractController
      */
     public function edit(Request $request, Booking $booking): Response
     {
-        $form = $this->createForm(BookingType::class, $booking);
+        $form = $this->createForm(Booking1Type::class, $booking);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
