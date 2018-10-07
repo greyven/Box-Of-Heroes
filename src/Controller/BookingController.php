@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Booking;
-use App\Form\Booking1Type;
+use App\Form\BookingType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,7 +57,7 @@ class BookingController extends AbstractController
     public function new(Request $request): Response
     {
         $booking = new Booking();
-        $form = $this->createForm(Booking1Type::class, $booking);
+        $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -65,7 +65,7 @@ class BookingController extends AbstractController
             $em->persist($booking);
             $em->flush();
 
-            return $this->redirectToRoute('booking_index');
+            return $this->redirectToRoute('index');
         }
 
         return $this->render('booking/new.html.twig', [
@@ -87,7 +87,7 @@ class BookingController extends AbstractController
      */
     public function edit(Request $request, Booking $booking): Response
     {
-        $form = $this->createForm(Booking1Type::class, $booking);
+        $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
