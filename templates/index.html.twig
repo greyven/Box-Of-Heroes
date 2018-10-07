@@ -1,0 +1,89 @@
+{# app/templates/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="well">
+        {% if is_granted(expression('"ROLE_ADMIN" in roles')) %}
+            <p>Je suis admin.</p>
+            <a href="{{ path('security_logout') }}">Déconnexion</a>
+        {% else %}
+            <a href="{{ path('user_registration')}}">Inscription</a>
+            <br/>
+            <a href="{{ path('security_login')}}">Connexion</a>
+        {% endif %}
+    </div>
+
+
+    <div>
+        Essai d'affichage du calendrier.
+    </div>
+    <br/>
+
+    <div class="container">
+        {% if is_granted(expression('"ROLE_ADMIN" in roles')) %}
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+
+                    {#<div class="container">#}
+                        {#<h2>Ma modale</h2>#}
+                        {#<!-- Trigger the modal with a button -->#}
+                        {#<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#maModal">Ouvrir Modale</button>#}
+
+                        {#<!-- Modal -->#}
+                        {#<div class="modal fade" id="maModal" role="dialog">#}
+                            {#<div class="modal-dialog">#}
+                                {#<!-- Modal content-->#}
+                                {#<div class="modal-content">#}
+                                    {#<div class="modal-header">#}
+                                        {#<button type="button" class="close" data-dismiss="modal">&times;</button>#}
+                                        {#<h4 class="modal-title">Modal Header</h4>#}
+                                    {#</div>#}
+                                    {#<div class="modal-body">#}
+                                        {#{% include 'booking/new.html.twig' %}#}
+                                        {#{{ path('booking_new') }}#}
+                                    {#</div>#}
+                                    {#<div class="modal-footer">#}
+                                        {#<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
+                                    {#</div>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+
+                    {#<a href="{{ path('booking_new') }}" onclick="window.open(this.href, 'Nouvel evenement',#}
+                        {#'height=400, width=400, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, ' +#}
+                         {#'directories=no, status=no, left=250, top=350'); return(false);">#}
+                        {#Créer évènement#}
+                    {#</a>#}
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <form action="{{ path('booking_new') }}">
+                                <input type="submit" value="Créer évènement" />
+                            </form>
+                        </div>
+                        <div class="col-xs-6">
+                            <form action="{{ path('booking_index') }}">
+                                <input type="submit" value="Modifier/Supprimer évènement" />
+                            </form>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-8">
+                {% include '_calendar.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/fullcalendar/includeFullCalendar.js') }}"></script>
+{% endblock %}
