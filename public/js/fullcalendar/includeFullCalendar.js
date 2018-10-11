@@ -25,16 +25,16 @@ $(function ()
             eventSources:
                 [
                     {
-                        url: '/box-of-heroes/public/booking/getBookings',
+                        url: $('#calendar-holder').data('eventsUrl'),
                         color: '#ef9857',
                         textColor: 'black',
-                        type: 'GET',
-                        data: {
-                            filters: {}
-                        },
-                        error: function () {
-                            // alert('There was an error while fetching FullCalendar!');
-                        }
+                        // type: 'GET',
+                        // data: {
+                        //     filters: {}
+                        // },
+                        // error: function () {
+                        //     // alert('There was an error while fetching FullCalendar!');
+                        // }
                     }
                 ]
         });
