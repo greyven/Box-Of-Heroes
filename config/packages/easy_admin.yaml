@@ -1,0 +1,11 @@
+easy_admin:
+#    entities:
+#        # List the entity class name you want to manage
+#        - App\Entity\Booking
+#        - App\Entity\User
+     site_name: 'Box of Heroes'
+     entities:
+         Booking:
+             class: App\Entity\Booking
+         User:
+             class: App\Entity\User
