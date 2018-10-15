@@ -9,3 +9,7 @@ easy_admin:
              class: App\Entity\Booking
          User:
              class: App\Entity\User
+         Author:
+             class: App\Entity\Author
+         BlogPost:
+             class: App\Entity\BlogPost
