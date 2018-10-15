@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Actualités{% endblock %}
+
+{% block body %}
+
+    {% if is_granted(expression('"ROLE_ADMIN" in roles')) %}
+        <br/>
+        <div class="row">
+            <div class="centerBlock">
+                <div class="col-xs-10">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <form action="#">
+                                <input type="submit" value="Nouvelle actualité" />
+                            </form>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <br/>
+    {% endif %}
+
+    <div class="row">
+        <div class="centerBlock">
+            <div class="col-xs-10 blog-main">
+                {% for blogPost in blogPosts %}
+                    {% set paragraphs = blogPost.description|split('</p>') %}
+                    {% set firstParagraph = paragraphs|first ~ '</p>' %}
+                    <div class="blog-post">
+                        <h2 class="blog-post-title">
+                            {{ blogPost.title }}
+                        </h2>
+                        <p class="blog-post-meta">
+                            {{ blogPost.getUpdatedAt|date('F j, Y') }} by
+
+                            {% if blogPost.author %}
+                                {{ blogPost.author.name }}
+                            {% else %}
+                                Unknown Author
+                            {% endif %}
+                        </p>
+                        {{ firstParagraph|raw }}<br />
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        You have no blog articles. Please log in and create an article.
+                    </div>
+                {% endfor %}
+
+                {% set canPrevious = page > 1 %}
+                {% set canNext = (page * entryLimit) < totalBlogPosts %}
+                <nav>
+                    <ul class="pager">
+                        <li class="previous {% if canPrevious == false %}disabled{% endif %}">
+                            <a href="{% if canPrevious %}{{ path('news', {'page': page - 1}) }}{% endif %}">
+                                <span aria-hidden="true">&larr;</span> Older
+                            </a>
+                        </li>
+                        <li class="next {% if canNext == false %}disabled{% endif %}">
+                            <a href="{% if canNext %}{{ path('news', {'page': page + 1}) }}{% endif %}">
+                                Newer <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
