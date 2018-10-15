@@ -18,10 +18,10 @@
             <div class="hidden-xs col-sm-12">
                 <div class="centerMenu">
                     <ul id="menu" class="sticky">
-                        <li><a href="#">Accueil</a></li>
+                        <li><a href="{{ path('index') }}">Accueil</a></li>
                         <li><a href="#">L'Association</a></li>
-                        <li><a href="#">Agenda et activités</a></li>
-                        <li><a href="#">Actualités</a></li>
+                        <li><a href="{{ path('agenda') }}">Agenda et activités</a></li>
+                        <li><a href="{{ path('news') }}">Actualités</a></li>
                         <li><a href="#">Facebook</a></li>
                         <li><a href="#">Nos partenaires</a></li>
                         <li><a href="#">Nous contacter</a></li>
@@ -40,7 +40,7 @@
                                 </label>
                                 <div class="tab-content">
                                     <p>
-                                        <a href="#">
+                                        <a href="{{ path('index') }}">
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="accordionLink">
@@ -62,7 +62,7 @@
                                         </a>
                                     </p>
                                     <p>
-                                        <a href="#">
+                                        <a href="{{ path('agenda') }}">
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="accordionLink">
@@ -73,7 +73,7 @@
                                         </a>
                                     </p>
                                     <p>
-                                        <a href="#">
+                                        <a href="{{ path('news') }}">
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="accordionLink">
