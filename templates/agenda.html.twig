@@ -1,0 +1,50 @@
+{# app/templates/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <br/>
+
+    {% if is_granted(expression('"ROLE_ADMIN" in roles')) %}
+        <div class="row">
+            <div class="centerBlock">
+                <div class="col-xs-10">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <div class="pull-left">
+                                <form action="{{ path('booking_new') }}">
+                                    <input type="submit" value="Créer évènement" />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="pull-left">
+                                <form action="{{ path('booking_index') }}">
+                                    <input type="submit" value="Modifier/Supprimer évènement" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="centerBlock">
+                    <div class="col-xs-10">
+                        {% include '_calendar.html.twig' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/fullcalendar/includeFullCalendar.js') }}"></script>
+{% endblock %}
